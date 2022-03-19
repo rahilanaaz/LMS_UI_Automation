@@ -10,6 +10,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.opentelemetry.exporter.logging.SystemOutLogExporter;
 
 public class Base {
 	
@@ -68,6 +69,7 @@ public class Base {
 		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.getimplicitWait()));
 		driver.get(url);
 		System.out.println("Hello World");
+		System.out.println("Hello Universe");
 		
 		return getDriver();
 		
