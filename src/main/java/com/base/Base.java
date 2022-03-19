@@ -17,6 +17,7 @@ public class Base {
 	public static ThreadLocal<WebDriver> tdriver;
 	public static Properties prop;
 	
+	
 	public Base()
 	{
 		prop = new Properties();
@@ -66,6 +67,7 @@ public class Base {
 		//driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Constants.getPageLoadTimeOut()));
 		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.getimplicitWait()));
 		driver.get(url);
+		System.out.println("Hello World");
 		
 		return getDriver();
 		
