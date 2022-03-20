@@ -33,8 +33,8 @@ Then Admin will be navigated to  Manage user(admin) page, Unregistered User list
 
 Scenario: Check whether Admin can be able to edit Unregistered user 
 Given Admin is on  Manage user(admin) page, Unregistered User list
-When Admin clicks on edit icon of particular unregistered user 
-Then Admin will be navigated to manage users(admin) page and able to edit User details like Time zone, User role batch, Program 
+When Admin clicks on edit icon of particular unregistered user and admin will be navigated to manage users(admin) page 
+Then Admin will be able to edit User details like Time zone, User role batch, Program.
 
 
 Scenario: Check whether Admin can be able to delete Unregistered user
