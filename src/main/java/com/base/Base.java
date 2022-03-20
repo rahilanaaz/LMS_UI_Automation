@@ -1,5 +1,6 @@
 package com.base;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -48,19 +49,27 @@ public class Base {
 		
 		if(browserName.equalsIgnoreCase("chrome"))
 		{
-	
-		System.setProperty("webdriver.chrome.driver", filepath);
+	    File file  = new File(prop.getProperty("chromepath"));
+	    String chromeAbsolutePath = file.getAbsolutePath();
+	    		
+		System.setProperty("webdriver.chrome.driver", chromeAbsolutePath);
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
 		}
 		else if(browserName.equalsIgnoreCase("edge"))
 		{
-		System.setProperty("webdriver.edge.driver",filepath);
+			File edgefile  = new File(prop.getProperty("edgepath"));
+		    String edgeAbsolutePath = edgefile.getAbsolutePath();
+		    		
+		System.setProperty("webdriver.edge.driver",edgeAbsolutePath);
 		driver = new EdgeDriver();
 		}
 		else if(browserName.equalsIgnoreCase("firefox"))
 		{
-		System.setProperty("webdriver.gecko.driver",filepath);
+
+			File geckofile  = new File(prop.getProperty("firefoxpath"));
+		    String geckoAbsolutePath = geckofile.getAbsolutePath();
+		System.setProperty("webdriver.gecko.driver",geckoAbsolutePath);
 		driver = new FirefoxDriver();
 		}
 		
