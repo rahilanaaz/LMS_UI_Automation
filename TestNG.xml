@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="TestSuite1" verbose="10" parallel ="true" thread-count="5">
+<listeners>
+	<listener class-name="./LMS_UI_Automation/src/test/java/testrunner/AllureListener.java"></listener>
+</listeners>
+  <test name="LMS_UI Testing">
+  <parameter name="browserName" value="chrome" />
+    <classes>
+    <class name="testrunner.TestRunner">
+      </class>
+    </classes>
+  </test>
+</suite>
