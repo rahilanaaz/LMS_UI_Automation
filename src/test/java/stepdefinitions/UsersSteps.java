@@ -16,11 +16,7 @@ public class UsersSteps extends Base {
 	UsersPage Users = new UsersPage();
 	
 	
-UploadPage UP;
-	
-	UploadStep(){
-				super();
-		}
+
 	
 	@Before
 	public void beforeScenario() {
