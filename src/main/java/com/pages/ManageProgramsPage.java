@@ -6,7 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.base.Base;
 
-public class ManageProgramsPage extends Base{
+public class ManageProgramsPage extends Base {
 	
 	@FindBy(id = "btnAddProgram")
 	WebElement addProgramBtn;

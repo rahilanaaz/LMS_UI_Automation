@@ -45,7 +45,7 @@ public class Base {
 	public static WebDriver initialize(String browserName)
 	{
 		String url = prop.getProperty("url");
-		prop.getProperty("browser");
+		//prop.getProperty("browser");
 		
 		if(browserName.equalsIgnoreCase("chrome"))
 		{
