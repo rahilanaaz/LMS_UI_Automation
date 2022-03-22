@@ -1,5 +1,7 @@
 package com.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -10,9 +12,6 @@ public class ManageProgramsPage extends Base{
 	
 	@FindBy(id = "btnAddProgram")
 	WebElement addProgramBtn;
-	
-	@FindBy(id = "linkPrograms ")
-	WebElement programsLink;
 	
 	@FindBy(id = "btnEditProgram")
 	WebElement editIconLink;
@@ -35,15 +34,26 @@ public class ManageProgramsPage extends Base{
 	@FindBy(id = "btnProgramSubmit")
 	WebElement submitBtn;
 	
+	@FindBy(id = "programName")
+	List<WebElement> listProgName;
+	
+	@FindBy(id = "ProgDesc")
+	List<WebElement> listProgDesc;
+	
+	@FindBy(id = "ProgramStatus")
+	List<WebElement> listProgStatus;
+	
+	@FindBy(id = "PgmCreationtime")
+	List<WebElement> listProgCreationTime;
+	
+	@FindBy(id = "PgmModifiedtime")
+	List<WebElement> listProgModifiedTime;
+	
 	public ManageProgramsPage() {
 		
 		PageFactory.initElements(driver, this);
 	}
 	
-	public void clickOnProgramsLink() {
-		
-		programsLink.click();
-	}
 	
 	public void clickOnAddProgramBtn() {
 		
@@ -67,6 +77,66 @@ public class ManageProgramsPage extends Base{
 			}
 		
 		submitBtn.click();
+	}
+	
+	public String ProgNameListSize() {
+		
+		int progNameListSize = listProgName.size();
+		return Integer.toString(progNameListSize);
+	}
+	
+    public String ProgDescListSize() {
+		
+		int progDescListSize = listProgDesc.size();
+		return Integer.toString(progDescListSize);
+	}
+    
+   public String ProgStatusListSize() {
+		
+		int progStatusListSize = listProgStatus.size();
+		return Integer.toString(progStatusListSize);
+	}
+   
+   public String ProgCreationTimeListSize() {
+		
+		int progCreationTimeListSize = listProgCreationTime.size();
+		return Integer.toString(progCreationTimeListSize);
+	}
+   
+   public String ProgModifiedTimeListSize() {
+		
+		int progModifiedTimeListSize = listProgModifiedTime.size();
+		return Integer.toString(progModifiedTimeListSize);
+	}
+	
+	public String newAddedProgName() {
+		
+		String progName = listProgName.get(listProgName.size()-1).getText();
+		return progName;
+	}
+	
+    public String newAddedProgDesc() {
+		
+		String progDesc = listProgDesc.get(listProgDesc.size()-1).getText();
+		return progDesc;
+	}
+    
+    public String newAddedProgStatus() {
+		
+		String progStatus = listProgStatus.get(listProgStatus.size()-1).getText();
+		return progStatus;
+	}
+    
+   public String newAddedProgCreationTime() {
+		
+		String progCreationTime = listProgCreationTime.get(listProgCreationTime.size()-1).getText();
+		return progCreationTime;
+	}
+   
+   public String newAddedProgModifiedTime() {
+		
+		String progModifiedTime = listProgModifiedTime.get(listProgModifiedTime.size()-1).getText();
+		return progModifiedTime;
 	}
 	
 	public void clickOnEditIconLink() {
@@ -101,6 +171,7 @@ public class ManageProgramsPage extends Base{
 		
 		trashIconLink.click();
 	}
+	
 
 	
 	

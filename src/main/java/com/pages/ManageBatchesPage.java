@@ -1,4 +1,7 @@
+
 package com.pages;
+
+import java.util.List;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -41,6 +44,27 @@ public class ManageBatchesPage extends Base {
 	@FindBy(id = "btnSubmit")
 	WebElement submitBtn;
 	
+	@FindBy(id = "BatchID")
+	List<WebElement> listBatchID;
+	
+	@FindBy(id = "BatchName")
+	List<WebElement> listBatchName;
+	
+	@FindBy(id = "BatchDesc")
+	List<WebElement> listBatchDesc;
+	
+	@FindBy(id = "BatchStatus")
+	List<WebElement> listBatchStatus;
+	
+	@FindBy(id = "BatchClasses")
+	List<WebElement> listBatchClasses;
+	
+	@FindBy(id = "BatchCreationtime")
+	List<WebElement> listBatchCreationTime;
+	
+	@FindBy(id = "BatchModifiedtime")
+	List<WebElement> listBatchModifiedTime;
+	
 	public ManageBatchesPage() {
 		
 		PageFactory.initElements(driver, this);
@@ -57,6 +81,95 @@ public class ManageBatchesPage extends Base {
 	}
 	
 	public void clickOnEditBatchIconBtn() {
+		
+		editIconLink.click();
+	}
+	
+   public String batchIDListSize() {
+		
+	    int batchIDListSize = listBatchID.size();
+		return Integer.toString(batchIDListSize);
+	}
+	
+    public String batchNameListSize() {
+		
+		int batchNameListSize = listBatchName.size();
+		return Integer.toString(batchNameListSize);
+	}
+	
+    public String batchDescListSize() {
+		
+		int batchDescListSize = listBatchDesc.size();
+		return Integer.toString(batchDescListSize);
+	}
+    
+   public String batchStatusListSize() {
+		
+		int batchStatusListSize = listBatchStatus.size();
+		return Integer.toString(batchStatusListSize);
+	}
+   
+   public String batchClassesListSize() {
+		
+	    int batchClassesListSize = listBatchClasses.size();
+		return Integer.toString(batchClassesListSize);
+	}
+   
+   public String batchCreationTimeListSize() {
+		
+		int batchCreationTimeListSize = listBatchCreationTime.size();
+		return Integer.toString(batchCreationTimeListSize);
+	}
+   
+   public String batchModifiedTimeListSize() {
+		
+		int batchModifiedTimeListSize = listBatchModifiedTime.size();
+		return Integer.toString(batchModifiedTimeListSize);
+	}
+   
+   public String newAddedBatchID() {
+		
+		String batchID = listBatchID.get(listBatchID.size()-1).getText();
+		return batchID;
+	}
+	
+	public String newAddedBatchName() {
+		
+		String batchName = listBatchName.get(listBatchName.size()-1).getText();
+		return batchName;
+	}
+	
+    public String newAddedBatchDesc() {
+		
+		String batchDesc = listBatchDesc.get(listBatchDesc.size()-1).getText();
+		return batchDesc;
+	}
+    
+    public String newAddedBatchStatus() {
+		
+		String batchStatus = listBatchStatus.get(listBatchStatus.size()-1).getText();
+		return batchStatus;
+	}
+    
+   public String newAddedBatchClasses() {
+		
+		String batchClasses = listBatchClasses.get(listBatchClasses.size()-1).getText();
+		return batchClasses;
+	}
+    
+   public String newAddedBatchCreationTime() {
+		
+		String batchCreationTime = listBatchCreationTime.get(listBatchCreationTime.size()-1).getText();
+		return batchCreationTime;
+	}
+   
+   public String newAddedBatchModifiedTime() {
+		
+		String batchModifiedTime = listBatchModifiedTime.get(listBatchModifiedTime.size()-1).getText();
+		return batchModifiedTime;
+	}
+	
+	public void clickOnEditIconLink() {
 		
 		editIconLink.click();
 	}
@@ -102,3 +215,4 @@ public class ManageBatchesPage extends Base {
 	
 	
 }
+
