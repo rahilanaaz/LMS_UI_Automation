@@ -1,6 +1,9 @@
 package stepdefinitions;
 
+import org.testng.Assert;
+
 import com.base.Base;
+import com.pages.HomePage;
 import com.pages.ManageProgramsPage;
 
 import io.cucumber.java.After;
@@ -11,6 +14,16 @@ import io.cucumber.java.en.When;
 
 public class ManageProgramsSteps extends Base {
 	
+	String sizeOfProgNameBefore;
+	String sizeOfProgDescBefore;
+	String sizeOfProgStatusBefore;
+	String sizeOfCreatedTimeBefore;
+	String sizeOfModifiedTimeBefore;
+	String programName;
+	String programDesc;
+	String programStatus;
+	
+	HomePage homePage;
 	ManageProgramsPage manageProgPage;
 	
 	ManageProgramsSteps(){
@@ -23,36 +36,16 @@ public class ManageProgramsSteps extends Base {
 		
 		initialize(prop.getProperty("browser"));
 		manageProgPage = new ManageProgramsPage();
+		homePage = new HomePage();
 		
 	}
 	
 	@After
 	public void tearDown() {
 		
-		
+		driver.quit();
 	}
 	
-	
-	
-	
-
-@Given("Admin is on Manage Programs Page\\(admin) by clicking on Programs Tab")
-public void admin_is_on_manage_programs_page_admin_by_clicking_on_programs_tab() {
-    
-	
-}
-
-@When("Admin tries to view exisiting program  details")
-public void admin_tries_to_view_exisiting_program_details() {
-   
-	
-}
-
-@Then("All the existing program details will be displayed in Manage Programs Page\\(admin)")
-public void all_the_existing_program_details_will_be_displayed_in_manage_programs_page_admin() {
-    
-	
-}
 
 @Given("Admin is on Add tab in Add\\/Edit Programs page by clicking Add Program in Manage Programs Page\\(admin)")
 public void admin_is_on_add_tab_in_add_edit_programs_page_by_clicking_add_program_in_manage_programs_page_admin() {
@@ -63,15 +56,25 @@ public void admin_is_on_add_tab_in_add_edit_programs_page_by_clicking_add_progra
 }
 
 @When("Admin clicks on submit button after entering the \"(.*)\" and \"(.*)\" and \"(.*)\"")
-public void admin_clicks_on_submit_button_after_entering_the_program_name_and_program_description_and_program_status(String ProgName,String progDesc, String progStatus) {
+public void admin_clicks_on_submit_button_after_entering_the_program_name_and_program_description_and_program_status(String progName,String progDesc, String progStatus) {
+	
+   programName = progName;
+   programDesc = progDesc;
+   programStatus = progStatus;
    
-	manageProgPage.addProgram(ProgName, progDesc, progStatus);
+   manageProgPage.addProgram(progName, progDesc, progStatus);
 	
 }
 
 @Then("All the program details will be added to Programs List in Manage Programs Page\\(admin) with auto generated same ProgramCreationtime and ProgramModifiedtime in   MM\\/DD\\/YY HH:MM format")
 public void all_the_program_details_will_be_added_to_programs_list_in_manage_programs_page_admin_with_auto_generated_same_program_creationtime_and_program_modifiedtime_in_mm_dd_yy_hh_mm_format() {
    
+	Assert.assertEquals(manageProgPage.newAddedProgName(), programName);
+	Assert.assertEquals(manageProgPage.newAddedProgDesc(), programDesc);
+	Assert.assertEquals(manageProgPage.newAddedProgStatus(), programStatus);
+	Assert.assertNotNull(manageProgPage.newAddedProgCreationTime());
+	Assert.assertNotNull(manageProgPage.newAddedProgModifiedTime());
+	Assert.assertEquals(manageProgPage.newAddedProgCreationTime(), manageProgPage.newAddedProgModifiedTime());
 	
 }
 
@@ -96,6 +99,13 @@ public void all_the_updated_program_details_will_be_added_to_programs_list_in_ma
 @Given("Admin is on Manage Programs Page\\(admin) after clicking on Programs Tab")
 public void admin_is_on_manage_programs_page_admin_after_clicking_on_programs_tab() {
    
+	homePage.clickOnPrograms();
+	
+	sizeOfProgNameBefore = manageProgPage.ProgNameListSize();
+	sizeOfProgDescBefore = manageProgPage.ProgDescListSize();
+	sizeOfProgStatusBefore = manageProgPage.ProgStatusListSize();
+	sizeOfCreatedTimeBefore = manageProgPage.ProgCreationTimeListSize();
+	sizeOfModifiedTimeBefore = manageProgPage.ProgModifiedTimeListSize();
 	
 }
 
@@ -108,7 +118,17 @@ public void admin_clicks_on_trash_icon_for_any_program_in_programs_list() {
 @Then("Program will be deleted from the Programs List in Manage Programs Page\\(admin)")
 public void program_will_be_deleted_from_the_programs_list_in_manage_programs_page_admin() {
    
+	String sizeOfProgNameAfter = manageProgPage.ProgNameListSize();
+	String sizeOfProgDescAfter = manageProgPage.ProgDescListSize();
+	String sizeOfProgStatusAfter = manageProgPage.ProgStatusListSize();
+	String sizeOfCreatedTimeAfter = manageProgPage.ProgCreationTimeListSize();
+	String sizeOfModifiedTimeAfter = manageProgPage.ProgModifiedTimeListSize();
 	
+	Assert.assertNotEquals(sizeOfProgNameAfter, sizeOfProgNameBefore);
+	Assert.assertNotEquals(sizeOfProgDescAfter, sizeOfProgDescBefore);
+	Assert.assertNotEquals(sizeOfProgStatusAfter, sizeOfProgStatusBefore);
+	Assert.assertNotEquals(sizeOfCreatedTimeAfter, sizeOfCreatedTimeBefore);
+	Assert.assertNotEquals(sizeOfModifiedTimeAfter, sizeOfModifiedTimeBefore);
 }
 
 }
