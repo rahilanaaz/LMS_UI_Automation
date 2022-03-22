@@ -18,7 +18,7 @@ public class Base {
 	public static WebDriver driver;
 	public static ThreadLocal<WebDriver> tdriver;
 	public static Properties prop;
-	public static String filepath = "./config/config.properties";
+	public static String filepath = System.getProperty("User.dir")+"\\src\\main\\java\\com\\config\\config.properties";
 	
 	public Base()
 	{
@@ -78,9 +78,7 @@ public class Base {
 		//driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Constants.getPageLoadTimeOut()));
 		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.getimplicitWait()));
 		driver.get(url);
-		System.out.println("Hello World");
-		System.out.println("Hello Universe");
-		System.out.println("hello Java world");
+		
 		
 		return getDriver();
 		

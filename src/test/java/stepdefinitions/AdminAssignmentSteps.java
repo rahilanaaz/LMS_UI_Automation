@@ -6,6 +6,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+<<<<<<< HEAD
 import com.base.Base;
 import com.pages.AdminAssignmentPage;
 
@@ -30,6 +31,41 @@ public class AdminAssignmentSteps extends Base{
 		driver.quit();
 	}
 	
+=======
+public class AdminAssignmentSteps extends Base{
+	
+	AdminAssignmentPage AdminAssignPg= new AdminAssignmentPage();
+	
+	@Before
+		public void beforeScenario() {
+		Base.initialize("chrome");}
+	
+	@After
+	public void tearDown()
+	{
+		driver.quit();
+	}
+	
+	@Given("Admin is on Add tab of manage Assignments page(admin view) by clicking on Add Assignment in Manage Assignments Page(admin)")
+	public void admin_is_on_add_tab_of_manage_assignments_page_by_clicking_on_add_assignment() {
+		//AdminAssignmentPage.goToAdminAssignPg();
+	}
+	
+   @When("When Admin clicks on submit button after selecting Batch and enters Assignment name, Assignment Description , Assignment Due, Upload assignments")
+	public void admin_clicks_on_submit_button_enters_assignment_details() {
+		//Assignment details inside the method
+	}
+   @Then("Created assignments will be displayed in Manage Assignments Page(admin) and/or Manage Assignment page(User View)")
+	public void created_assignments_will_be_displayed_in_manage_assignments_page() {
+		//Assignment details inside the method
+	}
+	
+   @Given("Admin is on Edit tab of manage Assignments page(admin view) by clicking on Add Assignment in Manage Assignments Page(admin)")
+	public void admin_is_on_edit_tab_of_manage_assignments_page_by_clicking_on_add_assignment() {
+		//AdminAssignmentPage.goToAdminAssignPg();
+	}
+ 
+>>>>>>> Branch_Sumathi
 
 	@Given("Admin is on Add tab of manage Assignments page\\(admin view) by clicking on Add Assignment in Manage Assignments Page\\(admin)")
 	public void admin_is_on_add_tab_of_manage_assignments_page_admin_view_by_clicking_on_add_assignment_in_manage_assignments_page_admin() {
