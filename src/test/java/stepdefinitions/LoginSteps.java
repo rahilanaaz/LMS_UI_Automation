@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import com.base.Base;
+import com.pages.HomePage;
 import com.pages.LaunchWebsitePage;
 import com.pages.LoginPage;
 
@@ -23,6 +24,7 @@ public class LoginSteps extends Base {
 	
 	LoginPage loginPage = new LoginPage();
 	LaunchWebsitePage launchPage = new LaunchWebsitePage();
+	HomePage homePageObject = new HomePage();
 	//String reqUrl;
 	String login;
 	String launchpage;
@@ -58,7 +60,7 @@ public class LoginSteps extends Base {
 		public void admin_or_user_is_on_login_page() {
 		    // Write code here that turns the phrase above into concrete actions
 			//assert login page here
-			login =loginPage.getUrl();
+			login =loginPage.getpresentUrl();
 			
 			assertEquals(login, prop.getProperty("loginpage"));
 			
@@ -66,17 +68,17 @@ public class LoginSteps extends Base {
 		   
 		}
 			
-		//@SubmitButton-PostiveScenario
+		//@SubmitButton-PostiveScenario -use then of @loginpagevalidation as given here
 		/*@Given("Admin or User is on LoginPage")
 		public void admin_or_user_is_on_login_page() {
 		    // Write code here that turns the phrase above into concrete actions
 			System.out.println("LMS:UI Admin or User is on login Page");
-		}*/ //- use then of @loginpagevalidation as given here
+		}*/ 
 		
 		@When("Admin or User enters (.*), (.*), clicks Login Button")
 		public void admin_or_user_enters_user_name_password_clicks_login_button(String UserName, String Password) {
 		    // Write code here that turns the phrase above into concrete actions
-			loginPage.signInPage(UserName, Password);
+			 homePageObject = loginPage.signInPage(UserName, Password);
 			
 		   System.out.println("LmsUI: admin or user enter username , password ,clicks Login Button");
 		}
@@ -86,7 +88,7 @@ public class LoginSteps extends Base {
 		    // Write code here that turns the phrase above into concrete actions
 			assertEquals(true,loginPage.isLogoutDisplayed()); 
 			
-			assertEquals(loginPage.getUrl(), prop.getProperty("homepage"), "both are equal");
+			assertEquals(loginPage.getpresentUrl(), prop.getProperty("homepage"));
 			
 		   System.out.println("LmsUI: admin or user is navigated to Home page");
 		}
@@ -116,7 +118,7 @@ public class LoginSteps extends Base {
 			
 			assertEquals(false,loginPage.isLogoutDisplayed()); 
 			
-			assertNotEquals(loginPage.getUrl(), prop.getProperty("homepage"), "both are not equal");
+			assertNotEquals(loginPage.getpresentUrl(), prop.getProperty("homepage"), "both are not equal");
 			
 			assertNotNull(loginPage.getInvalidCredentialErrorMessage());
 			
@@ -127,28 +129,28 @@ public class LoginSteps extends Base {
 		@Given("Registerd User after clciking forgot password button, is on Answer Security Page")
 		public void registerd_user_after_clciking_forgot_password_button_is_on_answer_security_page() {
 		    // Write code here that turns the phrase above into concrete actions
-		    System.out.println("LMS-UI: Registered user is in Answer Security Page");
+		    
 		}
 
 		@When("Registerd User enters (.*), clicks next button.")
 		public void registerd_user_enters_UserName_clicks_next_button(String UserName) {
 		    // Write code here that turns the phrase above into concrete actions
 			
-		    System.out.println("LMS_UI: registerd user enters username and clicks next button");
+		    
 		}
 
 		@And("Registerd User enters answer for Security Question.")
 		public void registerd_user_enters_answer_for_security_question() {
 		    // Write code here that turns the phrase above into concrete actions
 			
-		    System.out.println("LMS-UI: registered user answers Security question");
+		    
 		}
 
 		@Then("Registerd User is shown with message: <Password Reset Link has been sent to Email Address>.")
 		public void registerd_user_is_shown_with_message_password_reset_link_has_been_sent_to_email_address() {
 		    // Write code here that turns the phrase above into concrete actions
 			
-		    System.out.println("LMS-UI: registerd user is shown with message");
+		    
 		}
 
 		
@@ -157,7 +159,7 @@ public class LoginSteps extends Base {
 		public void un_registerd_user_after_clciking_forgot_password_button_is_on_answer_security_page() {
 		    // Write code here that turns the phrase above into concrete actions
 			
-		    System.out.println("LMSUI: Unregistered user is on answer security page");
+		    
 		}
 
 		/*@When("UnRegisterd User enters UserName, clicks next Button.")
@@ -170,6 +172,6 @@ public class LoginSteps extends Base {
 		public void un_registered_user_is_shown_with_message_provided_email_id_is_not_registered() {
 		    // Write code here that turns the phrase above into concrete actions
 		   
-			System.out.println("LMSUI: unregistered user showm with message:Provided Email Id is not registered ");
+			
 		}
 	}

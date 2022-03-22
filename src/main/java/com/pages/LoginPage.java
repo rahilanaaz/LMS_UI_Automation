@@ -44,18 +44,22 @@ public class LoginPage extends Base{
 		return driver.getTitle();
 		
 	}
+	
 	public HomePage signInPage(String UserName,String Password) {
 		User.sendKeys(UserName);
 		userPassInfo.sendKeys(Password);
 		submit.click();
-		
+		//for postive case 
 		return new HomePage();
+		//for negative case
+		//show error message
+		//getInvalidCredentialErrorMessage();
 	}	
 	public boolean isLogoutDisplayed(){
 			return Logout.isDisplayed();
 		}
 	
-	public String getUrl() {
+	public String getpresentUrl() {
 		return driver.getCurrentUrl();
 	}
 		
@@ -63,12 +67,11 @@ public class LoginPage extends Base{
 	  return	ErrorMessage.getText();
 	}
 	
-	public void forgotPasswordClick() {
-		//if this button got clicked  ForgotPassword.click()
-		//if()
-		driver.navigate().to(prop.getProperty("ansSecurityPage"));
-		
-	
+	public AnswerSecurityQuestionPage forgotPasswordClick() {
+		//if this button got clicked 
+			ForgotPassword.click();
+			//driver.navigate().to(prop.getProperty("ansSecurityPage"));
+			return new AnswerSecurityQuestionPage();
 	}
 	
 }
