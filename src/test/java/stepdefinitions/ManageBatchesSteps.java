@@ -1,5 +1,8 @@
 package stepdefinitions;
+import org.testng.Assert;
+
 import com.base.Base;
+import com.pages.HomePage;
 import com.pages.ManageBatchesPage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -9,7 +12,20 @@ import io.cucumber.java.en.When;
 
 public class ManageBatchesSteps extends Base {
 	
+	String sizeOfBatchIDBefore;
+	String sizeOfBatchNameBefore;
+	String sizeOfBatchDescBefore;
+	String sizeOfBatchStatusBefore;
+	String sizeOfBatchClassesBefore;
+	String sizeOfCreatedTimeBefore;
+	String sizeOfModifiedTimeBefore;
+	String batchName;
+	String batchDesc;
+	String batchStatus;
+	String batchNoOfClasses;
+	
 	ManageBatchesPage manageBatchesPage;
+	HomePage homePage;
 	
 	ManageBatchesSteps(){
 		
@@ -21,6 +37,8 @@ public class ManageBatchesSteps extends Base {
 		
 		initialize(prop.getProperty("browser"));
 		manageBatchesPage = new ManageBatchesPage();
+		homePage = new HomePage();
+		homePage.clickOnBatches();
 		
 	}
 	
@@ -30,23 +48,6 @@ public class ManageBatchesSteps extends Base {
 		driver.quit();
 	}
 	
-	@Given("Admin is on Manage Batches Page\\(admin) screen, by clicking on batches tab")
-	public void admin_is_on_manage_batches_page_admin_screen_by_clicking_on_batches_tab() {
-	   
-		
-	}
-
-	@When("Admin tries to view exisiting Batch details")
-	public void admin_tries_to_view_exisiting_batch_details() {
-	   
-		
-	}
-
-	@Then("All the existing Batch details details will be displayed in Manage Batches Page\\(Admin)")
-	public void all_the_existing_batch_details_details_will_be_displayed_in_manage_batches_page_admin() {
-	    
-		
-	}
 
 	@Given("Admin is on Add tab of ADD\\/Edit batches page \\(admin) by clicking on Add Batch in Manage Batches Page\\(admin)")
 	public void admin_is_on_add_tab_of_add_edit_batches_page_admin_by_clicking_on_add_batch_in_manage_batches_page_admin() {
@@ -55,15 +56,26 @@ public class ManageBatchesSteps extends Base {
 	}
 
 	@When("Admin clicks on submit button after entering \"(.*)\" and \"(.*)\" and \"(.*)\" and \"(.*)\"")
-	public void admin_clicks_on_submit_button_after_entering_batch_name_batch_description_select_batch_status_enters_batch_no_of_classes(String batchName, String batchDesc, String batchNoOfClasses, String status) {
+	public void admin_clicks_on_submit_button_after_entering_batch_name_batch_description_select_batch_status_enters_batch_no_of_classes(String bName, String bDesc, String status, String bNoOfClasses) {
+		
+	   batchName = bName;
+	   batchDesc = bDesc;
+	   batchStatus = status;
+	   batchNoOfClasses = bNoOfClasses;
 	   
-		manageBatchesPage.addBatch(batchName, batchDesc, batchNoOfClasses, status);
+	   manageBatchesPage.addBatch(bName, bDesc, status, bNoOfClasses);
 	}
 
 	@Then("Created Batch details will be displayed in Manage Batches Page\\(Admin) with auto generated Created Date and Modified date in MM\\/DD\\/YY format")
 	public void created_batch_details_will_be_displayed_in_manage_batches_page_admin_with_auto_generated_created_date_and_modified_date_in_mm_dd_yy_format() {
 	   
-		
+		Assert.assertEquals(manageBatchesPage.newAddedBatchName(), batchName);
+		Assert.assertEquals(manageBatchesPage.newAddedBatchDesc(), batchDesc);
+		Assert.assertEquals(manageBatchesPage.newAddedBatchStatus(), batchStatus);
+		Assert.assertEquals(manageBatchesPage.newAddedBatchClasses(), batchNoOfClasses);
+		Assert.assertNotNull(manageBatchesPage.newAddedBatchID());
+		Assert.assertNotNull(manageBatchesPage.newAddedBatchCreationTime());
+		Assert.assertNotNull(manageBatchesPage.newAddedBatchModifiedTime());
 	}
 
 	@Given("Admin is on Edit tab of ADD\\/Edit batches page \\(admin) by clicking on edit icon")
@@ -87,6 +99,15 @@ public class ManageBatchesSteps extends Base {
 	@Given("Admin is on Manage Batches Page\\(admin) screen")
 	public void admin_is_on_manage_batches_page_admin_screen() {
 	   
+		homePage.clickOnBatches();
+		
+		sizeOfBatchIDBefore = manageBatchesPage.batchIDListSize();
+		sizeOfBatchNameBefore = manageBatchesPage.batchNameListSize();
+		sizeOfBatchDescBefore = manageBatchesPage.batchDescListSize();
+		sizeOfBatchStatusBefore = manageBatchesPage.batchStatusListSize();
+	    sizeOfBatchClassesBefore = manageBatchesPage.batchClassesListSize();
+		sizeOfCreatedTimeBefore = manageBatchesPage.batchCreationTimeListSize();
+		sizeOfModifiedTimeBefore = manageBatchesPage.batchModifiedTimeListSize();
 		
 	}
 
@@ -98,6 +119,22 @@ public class ManageBatchesSteps extends Base {
 
 	@Then("Batch will be deleted from the Batches List in Manage Batches Page\\(admin)")
 	public void batch_will_be_deleted_from_the_batches_list_in_manage_batches_page_admin() {
+		
+		String sizeOfBatchIDAfter = manageBatchesPage.batchIDListSize();
+		String sizeOfBatchNameAfter = manageBatchesPage.batchNameListSize();
+		String sizeOfBatchDescAfter = manageBatchesPage.batchDescListSize();
+		String sizeOfBatchStatusAfter = manageBatchesPage.batchStatusListSize();
+		String sizeOfBatchClassesAfter = manageBatchesPage.batchClassesListSize();
+		String sizeOfCreatedTimeAfter = manageBatchesPage.batchCreationTimeListSize();
+		String sizeOfModifiedTimeAfter = manageBatchesPage.batchModifiedTimeListSize();
+		
+		Assert.assertNotEquals(sizeOfBatchIDAfter, sizeOfBatchIDBefore);
+		Assert.assertNotEquals(sizeOfBatchNameAfter, sizeOfBatchNameBefore);
+		Assert.assertNotEquals(sizeOfBatchDescAfter, sizeOfBatchDescBefore);
+		Assert.assertNotEquals(sizeOfBatchStatusAfter, sizeOfBatchStatusBefore);
+		Assert.assertNotEquals(sizeOfBatchClassesAfter, sizeOfBatchClassesBefore);
+		Assert.assertNotEquals(sizeOfCreatedTimeAfter, sizeOfCreatedTimeBefore);
+		Assert.assertNotEquals(sizeOfModifiedTimeAfter, sizeOfModifiedTimeBefore);
 	    
 		
 	}
