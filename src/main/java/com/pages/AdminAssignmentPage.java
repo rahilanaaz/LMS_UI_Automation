@@ -105,8 +105,15 @@ public class AdminAssignmentPage extends Base {
 	}
 
 	public void deleteAssign() {
-		manageSubmissionsLink.click();
+		
+		currentAssignmentCount();
 		delAssignment.click();
+	}
+	
+	public void assertDeleteAssignments() {
+		int assignmentNewCount = assignmentElements.size();
+		assertEquals(this.currentAssignmentCount--, assignmentNewCount);
+//    			
 	}
 
 }
