@@ -14,9 +14,8 @@ public class AdminAssignmentSteps extends Base{
 	AdminAssignmentPage AdminAssignPg= new AdminAssignmentPage();
 	
 	@Before
-	public void setup(String browserName) {
-		initialize(browserName);
-	}
+		public void beforeScenario() {
+		Base.initialize("chrome");}
 	
 	@After
 	public void tearDown()

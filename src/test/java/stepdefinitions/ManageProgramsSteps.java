@@ -21,7 +21,7 @@ public class ManageProgramsSteps extends Base {
 	@Before
 	public void setUp() {
 		
-		initialize(prop.getProperty("browser"));
+		initialize("chrome");
 		manageProgPage = new ManageProgramsPage();
 		
 	}
