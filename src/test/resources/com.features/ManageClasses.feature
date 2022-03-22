@@ -18,7 +18,6 @@ Given Admin is on Edit tab by cliking on Edit icon in Manage Classes page(admin)
 When  Admin clicks on submit button after enters "<ClassTopic>" and "<StaffName>" and "<ClassDescrp>"
 Then  Updated Class details will be displayed in Manage Classes Page(admin)
 
-<<<<<<< HEAD:src/test/resources/com.features/ClassModification.feature
 #Example:
 |ClassTopic|staffName|ClassDescription|ClassDate|
 |Selenium|staff1|MyClassTest|20/Aug/2020|
@@ -26,7 +25,6 @@ Then  Updated Class details will be displayed in Manage Classes Page(admin)
 Examples:
                 | ClassTopic | StaffName| ClassDescrp     |
                 | SDET       | staff2   | MyClassTest     |
->>>>>>> Branch_Sumathi:src/test/resources/com.features/ManageClasses.feature
 
 
 Scenario: Check whether Admin can Delete existing Class for particular Batch
