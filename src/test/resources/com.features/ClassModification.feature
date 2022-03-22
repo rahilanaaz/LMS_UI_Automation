@@ -18,7 +18,7 @@ Given Admin is on Edit tab by cliking on Edit icon in Manage Classes page(admin)
 When  Admin clicks on submit button after entering the details
 Then  Updated Class details will be displayed in Manage Classes Page(admin)
 
-#Example :
+#Example:
 |ClassTopic|staffName|ClassDescription|ClassDate|
 |Selenium|staff1|MyClassTest|20/Aug/2020|
 
