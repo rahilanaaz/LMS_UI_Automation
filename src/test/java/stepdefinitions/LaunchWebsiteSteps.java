@@ -1,6 +1,7 @@
 package stepdefinitions;
 
 
+import static org.junit.Assert.assertThat;
 import static org.testng.Assert.assertEquals;
 
 import org.openqa.selenium.WebDriver;
@@ -16,7 +17,7 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
 
-public class LaunchWebsite extends Base {
+public class LaunchWebsiteSteps extends Base {
 	
 	LaunchWebsitePage launchPage = new LaunchWebsitePage();
 	
@@ -50,8 +51,11 @@ public class LaunchWebsite extends Base {
 			public void admin_or_user_is_on_lms_website_page() {
 			    // Write code here that turns the phrase above into concrete actions
 			//assert lms website here
-				currentBrowser =launchPage.Url();
+				currentBrowser =launchPage.LaunchUrl();
 				assertEquals(currentBrowser, url, "both are same");
+				
+				assertEquals(true, launchPage.isLoginDisplayed());
+				
 				System.out.println("LMSUI: Admin or user is on LMS website page");
 			}
 }
