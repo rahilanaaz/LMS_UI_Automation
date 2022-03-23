@@ -10,4 +10,4 @@ Then Arrow buttons will appear, large number of user records will be divided int
 Scenario: Check functionality of Pagination at Manage Attendance(Admin and Class Staff) page
 Given Admin is on  Manage Attendance(Admin and Class Staff) page of Manage Attendance(admin)
 When result is containing many  Student records
-Then Arrow buttons will appear,large number of Student records will be divided into smaller discrete pages
+Then Arrow buttons will appear, large number of Student records will be divided into smaller discrete pages

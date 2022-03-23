@@ -14,15 +14,19 @@ import io.cucumber.java.en.When;
 
 public class UsersSteps extends Base {
 	
+	String UserName;
 	String Email;
 	String Batch;
 	String Skill;
 	String Program;
 	
-	ManageUsersPage manageUsrPage;
 	HomePage homePage;
+	ManageUsersPage manageUsrPage;
+	public static int before;
 	
-	      UsersSteps()  {
+	
+	
+	   UsersSteps()  {
 
 		super();
 
@@ -34,7 +38,7 @@ public class UsersSteps extends Base {
 		initialize(prop.getProperty("browser"));
 		manageUsrPage = new ManageUsersPage();
 		homePage = new HomePage();
-		homePage.clickOnUsers();
+		//homePage.clickOnUsers();
 	}
 	 
 	@After
@@ -45,13 +49,16 @@ public class UsersSteps extends Base {
 		
 	}
 
-	@Given("Admin is on LMS Admin User Page")
+	@Given("Admin is on LMS Admin User Page, after clicking on User link")
 	public void admin_is_on_lms_admin_user_page() {
+		
 		homePage.clickOnUsers();
+		
 	}
 
 	@When("Admin clicks on search button after entering  the \"(.*)\" and \"(.*)\" and \"(.*)\" and \"(.*)\"")
 	public void admin_clicks_on_search_button_after_entering_email_or_batch_or_skill_or_program(String email, String batch, String skill, String program) {
+		 
 		  Email = email;
 		  Batch = batch ;
 		  Skill = skill ;
@@ -62,36 +69,42 @@ public class UsersSteps extends Base {
 
 	@Then("Admin will be navigated to Manage users\\(admin) page and Registered User list will be displayed.")
 	public void admin_will_be_navigated_to_manage_users_admin_page_and_registered_user_list_will_be_displayed() {
-	   //driver.navigate().to("https://www.LMS-UI.com/");
-		
-//		Assert.assertEquals(manageUsrPage.newAddedEmail(), Email);
-//		Assert.assertEquals(manageUsrPage.newAddedBatch(), Batch);
-//		Assert.assertEquals(manageUsrPage.newAddedSkill(), Skill);
-//		Assert.assertEquals(manageUsrPage.newAddedProgram(), Program);
+      
+		driver.navigate().to("https://www.LMS-UI.com/regUsrList");
+	
+		Assert.assertEquals(manageUsrPage.registeredEmail().equals(Email)  ||
+				manageUsrPage.registeredBatch().equals(Batch) ||
+				manageUsrPage.registeredSkill().equals(Skill) ||
+				manageUsrPage.registeredProgram().equals(Program), true);
 		
 	}
 
 	@Given("Admin is on Manage users\\(admin) page, Registered User list")
 	public void admin_is_on_manage_users_admin_page_registered_user_list() {
 	    
+		manageUsrPage.clickOnBtnRegUser();
 	}
 
 	@When("Admin clicks on edit icon, admin will be navigated to Manage users\\(admin) page")
 	public void admin_clicks_on_edit_icon_admin_will_be_navigated_to_manage_users_admin_page() { 
 		    
 		    manageUsrPage.clickOnEditIcon(); 
+		   // driver.navigate().to("https://www.LMS-UI.com/mngUsr");
+		    
 		  //manageRegUsrPage.goToManageUserPg();
 		
 	}
 
 	@Then("Admin able to edit User details like Time zone, User role batch, Program.")
-	public void admin_able_to_edit_user_details_like_time_zone_user_role_batch_program() {
-	    //
+	public void admin_able_to_edit_user_details_like_time_zone_user_role_batch_program(String timeZomne, String userRole, String batch, String program) {
+		
+		manageUsrPage.editUsrDetails( timeZomne,  userRole,  batch,  program); 
 	}
 
 	@Given("Admin is on Manage users\\(admin) page, Registered Users list")
 	public void admin_is_on_manage_users_admin_page_regitered_users_list() {
 	   
+		homePage.clickOnUsers();
 	}
 
 	@When("Admin clicks on trash icon of particular registered user")
@@ -105,11 +118,14 @@ public class UsersSteps extends Base {
 	@Then("Deleted registered user will be removed from Registered users list")
 	public void deleted_registered_user_will_be_removed_from_registered_users_list() {
 	   
+		int after = manageUsrPage.DeleteRegUserThen();
+		Assert.assertNotEquals(after, before);
 	}
 
 	@Given("Admin is on Manage users\\(admin) page, Registered Users list")
 	public void admin_is_on_manage_users_admin_page_registered_users_list () {
 		
+		homePage.clickOnUsers();
 	}
 	
 	@When("Admin clicks on eye icon for particular user")
@@ -128,6 +144,7 @@ public class UsersSteps extends Base {
 	@Given ("Admin is on LMS Admin User Page")
 	public void admin_is_on_lMS_admin_user_page() {
 		
+		homePage.clickOnUsers();
 	}
 	
 	@When("Admin clicks on New Unassigned User hyperlink")
@@ -140,11 +157,15 @@ public class UsersSteps extends Base {
 	@Then("Admin will be navigated to  Manage user\\(admin) page, Unregistered User list will be displayed")
 	public void admin_will_be_navigated_to_manage_user_admin_page_unregistered_user_list_will_be_displayed() {
 	   
+		Assert.assertEquals(manageUsrPage.UnregisteredEmail().equals(Email)  ||
+				manageUsrPage.UnregisteredUserName().equals(UserName), true);
+		
 	}
 
 	@Given("Admin is on  Manage user\\(admin) page, Unregistered User list")
 	public void admin_is_on_manage_user_admin_page_unregistered_user_list() {
-	  
+		
+		manageUsrPage.clickOnUnRegUserBtn();
 	}
 
 	@When("Admin clicks on edit icon of particular unregistered user, admin will be navigated to manage users\\(admin) page")
@@ -154,17 +175,18 @@ public class UsersSteps extends Base {
 		////manageUnregUsrPage.goToManageUserPg();
 	}
 	
-	@Then("Admin clicks on save button after entering  the \"(.*)\" and \"(.*)\" and \"(.*)\" and \"(.*)\"")
+	@Then("Admin will be able to edit User details like the \"(.*)\" and \"(.*)\" and \"(.*)\" and \"(.*)\"")
 	//@Then("Admin will be able to edit User details like Time zone, User role batch, Program, save")
 	public void admin_will_clicks_on_save_button_after_entering_the_time_zone_user_role_batch_program(String timeZomne, String userRole, String batch, String program) {
 	    
-       // manageUsrAdminPage.clickOnbtnSave( timeZomne,  userRole,  batch,  program); 
+		manageUsrPage.editUsrDetails( timeZomne,  userRole,  batch,  program); 
 	   
 	}
 	
-	@Given("Admin is on  Manage user(admin) page, Unregistered User list")
+	@Given("Admin is on  Manage user(admin) page, Unregistered User list after clicking on Unregistered Users Button")
 	public void admin_is_on_manage_user_admin_page_unregsred_user_list() {
 		
+		manageUsrPage.clickOnUnRegUserBtn();
 	}
 
 	@When("Admin clicks on trash icon of particular unregistered user")
@@ -175,6 +197,10 @@ public class UsersSteps extends Base {
 
 	@Then("Deleted unregistered user will be removed from Unregistered users list")
 	public void deleted_unregistered_user_will_be_removed_from_unregistered_users_list() {
+		
+		int after = manageUsrPage.DeleteUnRegUserThen();
+		Assert.assertNotEquals(after, before);
+		
 		//manageUsrPage.deleteUsers();
 	}
 }

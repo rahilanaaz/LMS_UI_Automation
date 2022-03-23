@@ -2,16 +2,25 @@ Feature: User modifications by Admin
   Background: Admin is logged in, Programs and Batches were created already 
  
 
-Scenario: Check whether Admin can search users by giving Email or Batch or Skill or program
-Given Admin is on LMS Admin User Page
-When Admin clicks on search button after entering  Email or Batch or Skill or program
+Scenario Outline: Check whether Admin can search users by giving Email or Batch or Skill or program
+Given Admin is on LMS Admin User Page after clicking on User link
+When Admin clicks on search button after entering  "<Email>" or "<Batch>" or "<Skill>" or "<program>"
 Then Admin will be navigated to Manage users(admin) page and Registered User list will be displayed.
 
+Examples:
+            | Email | Batch  | Skill  | program|
+            |dummy@gmail.com| 01| Python|SDET|
+            |dummy2@gmail.com| 02| Java|SDET|
 
-Scenario: Check whether Admin can edit registered user in Manage users(admin) page
+Scenario Outline: Check whether Admin can edit registered user in Manage users(admin) page
 Given Admin is on Manage users(admin) page, Registered User list
 When Admin clicks on edit icon, admin will be navigated to Manage users(admin) page
-Then  Admin able to edit User details like Time zone, User role batch, Program.
+Then  Admin able to edit User details like "<Timezone>", "<Userrole>",  "<batch>", "<Program>"
+
+Examples:
+             | Timezone | Userrole  | batch  | program|
+            |EST| User| SDET01|SDET|
+            |PST| User| SDET02|DML|
 
 
 Scenario: Check whether Admin can delete particular registered user in Manage users(admin) page
@@ -31,10 +40,15 @@ When Admin clicks on New Unassigned User hyperlink
 Then Admin will be navigated to  Manage user(admin) page, Unregistered User list will be displayed
 
 
-Scenario: Check whether Admin can be able to edit Unregistered user 
+Scenario Outline: Check whether Admin can be able to edit Unregistered user 
 Given Admin is on  Manage user(admin) page, Unregistered User list
 When Admin clicks on edit icon of particular unregistered user, admin will be navigated to manage users(admin) page 
-Then Admin will be able to edit User details like Time zone, User role batch, Program, save.
+Then Admin will be able to edit User details like "<Timezone>", "<Userrole>",  "<batch>", "<Program>"
+
+Examples:
+            | Timezone | Userrole  | batch  | program|
+            |EST| User| SDET01|SDET|
+            |PST| User| SDET02|DML|
 
 
 Scenario: Check whether Admin can be able to delete Unregistered user

@@ -2,14 +2,13 @@ package com.pages;
 
 import java.util.List;
 
-import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.base.Base;
 
-//import stepdefinitions.PaginationPage;
+
 
 public class ManagePaginationPage {
 
@@ -34,10 +33,22 @@ public class ManagePaginationPage {
 	@FindBy(id = "unregisteredTrashIcon")
 	WebElement trashIconUnregistered;
 	
-//	public PaginationPage() {
-//		
-//		SearchContext driver;
-//		PageFactory.initElements(driver, this);
+	@FindBy(id = "arrowButton")
+	WebElement arrowButton;	
+	
+	List<WebElement> userList;
+	//WebElement tablerow;
+	
+	
+	public int getTableRowCount() {
+	      return userList.size();
 	}
+	
+	public boolean hasArrows() {
+	      return arrowButton != null;
+	}	
+	
+}
+		
 	
 
