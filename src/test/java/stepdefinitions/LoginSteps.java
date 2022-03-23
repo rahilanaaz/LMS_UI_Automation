@@ -1,9 +1,11 @@
 package stepdefinitions;
 
 
+import static org.junit.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +15,7 @@ import com.base.Base;
 import com.pages.HomePage;
 import com.pages.LaunchWebsitePage;
 import com.pages.LoginPage;
+import com.util.Constants;
 
 import org.openqa.selenium.WebDriver;
 
@@ -25,6 +28,7 @@ public class LoginSteps extends Base {
 	LoginPage loginPage = new LoginPage();
 	LaunchWebsitePage launchPage = new LaunchWebsitePage();
 	HomePage homePageObject = new HomePage();
+	String GetTitle;
 	//String reqUrl;
 	String login;
 	String launchpage;
@@ -56,8 +60,8 @@ public class LoginSteps extends Base {
 			
 		    System.out.println("LMSUI: when user clicks login HyperLink");
 		}
-		@Then("Admin or User is on LoginPage.")
-		public void admin_or_user_is_on_login_page() {
+		@Then("Admin or User lands on LoginPage.")
+		public void admin_or_user_lands_on_login_page() {
 		    // Write code here that turns the phrase above into concrete actions
 			//assert login page here
 			login =loginPage.getpresentUrl();
@@ -69,16 +73,16 @@ public class LoginSteps extends Base {
 		}
 			
 		//@SubmitButton-PostiveScenario -use then of @loginpagevalidation as given here
-		/*@Given("Admin or User is on LoginPage")
+		@Given("Admin or User is on Loginpage")
 		public void admin_or_user_is_on_login_page() {
 		    // Write code here that turns the phrase above into concrete actions
 			System.out.println("LMS:UI Admin or User is on login Page");
-		}*/ 
+		}
 		
-		@When("Admin or User enters (.*), (.*), clicks Login Button")
+		@When("Admin or User enters (.*), (.*) clicks Login Button")
 		public void admin_or_user_enters_user_name_password_clicks_login_button(String UserName, String Password) {
 		    // Write code here that turns the phrase above into concrete actions
-			 homePageObject = loginPage.signInPage(UserName, Password);
+			GetTitle = loginPage.signInPage(UserName, Password);
 			
 		   System.out.println("LmsUI: admin or user enter username , password ,clicks Login Button");
 		}
@@ -88,7 +92,9 @@ public class LoginSteps extends Base {
 		    // Write code here that turns the phrase above into concrete actions
 			assertEquals(true,loginPage.isLogoutDisplayed()); 
 			
-			assertEquals(loginPage.getpresentUrl(), prop.getProperty("homepage"));
+			assertEquals(GetTitle, Constants.getHomePageConstant());
+			
+			//assertEquals(loginPage.getpresentUrl(), prop.getProperty("homepage"));
 			
 		   System.out.println("LmsUI: admin or user is navigated to Home page");
 		}
@@ -96,13 +102,13 @@ public class LoginSteps extends Base {
 		//@SubmitButton-NegativeScenario
 		
 		//Given Admin or User is on Loginpage -Negative case
-			/*@Given("Admin or User is on LoginPage")
-			public void admin_or_user_is_on_login_page() {
+			@Given("Admin or User is on LoginPage")
+			public void admin_or_user_is_on_login_Page() {
 				
 				
 			    // Write code here that turns the phrase above into concrete actions
 			   System.out.println("LmsUI: admin or user is on Login page");
-			}*/
+			}
 		
 		@When("Admin or User enters (.*), (.*), clicks Login Button")
 		public void admin_or_user_enters_invalid_user_name_invalid_password_clicks_login_button(String InvalidUserName ,String InvalidPassword) {
@@ -118,60 +124,15 @@ public class LoginSteps extends Base {
 			
 			assertEquals(false,loginPage.isLogoutDisplayed()); 
 			
-			assertNotEquals(loginPage.getpresentUrl(), prop.getProperty("homepage"), "both are not equal");
+			assertNotEquals(loginPage.getpresentUrl(), prop.getProperty("homepage"));
 			
 			assertNotNull(loginPage.getInvalidCredentialErrorMessage());
+			
+			
+			assertNotEquals(GetTitle, Constants.getAnswerSecurityPage());
 			
 			System.out.println("LmsUI:invalid credentials error message is shown");
 		}
 		
-		//@ForgotPasswordButtonRegisteredEmailIds-PostiveCase
-		@Given("Registerd User after clciking forgot password button, is on Answer Security Page")
-		public void registerd_user_after_clciking_forgot_password_button_is_on_answer_security_page() {
-		    // Write code here that turns the phrase above into concrete actions
-		    
-		}
-
-		@When("Registerd User enters (.*), clicks next button.")
-		public void registerd_user_enters_UserName_clicks_next_button(String UserName) {
-		    // Write code here that turns the phrase above into concrete actions
-			
-		    
-		}
-
-		@And("Registerd User enters answer for Security Question.")
-		public void registerd_user_enters_answer_for_security_question() {
-		    // Write code here that turns the phrase above into concrete actions
-			
-		    
-		}
-
-		@Then("Registerd User is shown with message: <Password Reset Link has been sent to Email Address>.")
-		public void registerd_user_is_shown_with_message_password_reset_link_has_been_sent_to_email_address() {
-		    // Write code here that turns the phrase above into concrete actions
-			
-		    
-		}
-
 		
-		  //@ForgotPasswardButtonUnRegisteredEmailIds-NegativeCase
-		@Given("UnRegisterd User after clciking forgot password button, is on Answer Security Page")
-		public void un_registerd_user_after_clciking_forgot_password_button_is_on_answer_security_page() {
-		    // Write code here that turns the phrase above into concrete actions
-			
-		    
-		}
-
-		/*@When("UnRegisterd User enters UserName, clicks next Button.")
-		public void un_registered_user_enters_user_name_clicks_next_button() {
-		    // Write code here that turns the phrase above into concrete actions
-		   System.out.println("admin or user enters Username , clicks forgot password");
-		}*/ //-Use postive case when
-		
-		@Then("UnRegisterd User is shown with message: <Provided Email Id is not registered>.")
-		public void un_registered_user_is_shown_with_message_provided_email_id_is_not_registered() {
-		    // Write code here that turns the phrase above into concrete actions
-		   
-			
-		}
 	}

@@ -45,15 +45,13 @@ public class LoginPage extends Base{
 		
 	}
 	
-	public HomePage signInPage(String UserName,String Password) {
+	public String signInPage(String UserName,String Password) {
 		User.sendKeys(UserName);
 		userPassInfo.sendKeys(Password);
 		submit.click();
-		//for postive case 
-		return new HomePage();
-		//for negative case
-		//show error message
-		//getInvalidCredentialErrorMessage();
+		
+		return driver.getTitle();
+		
 	}	
 	public boolean isLogoutDisplayed(){
 			return Logout.isDisplayed();

@@ -7,7 +7,7 @@ Scenario: Checking login hyperlink is working
 
 Given Admin or User is on LMS website page
 When Admin or User clicks Login Hyperlink
-Then Admin or User is on LoginPage.
+Then Admin or User lands on LoginPage.
 
 @SubmitButton-PostiveScenario
 Scenario Outline: Check Login is successful with valid credentials
